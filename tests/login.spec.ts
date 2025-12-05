@@ -1,13 +1,23 @@
 import { test, expect } from '@playwright/test';
+import { AdminPage } from './adminPage';
+import { ElectionOverviewPage } from './electionOverviewPage';
+
+
 
 test('admin can login', async ({ page }) => {
  
-    await page.goto('https://staten-briefstembureau-bepalingen.abacus-test.nl');
+    var adminPage = new AdminPage(page);
+    await adminPage.open();
 
-    await page.locator('css=input[name=username]').fill(process.env.ABACUS_USERNAME);
-    await page.locator('css=input[name=password]').fill(process.env.ABACUS_PASSWORD);
-    await page.getByRole('button', { name: 'Inloggen'}).click();
+    await adminPage.loginAsAdmin('Beheerder 1');
+    
+    await adminPage.selectElection('Gemeenteraad 2026');
 
-    await expect(page.locator('css=strong[id=navbar-username]')).toHaveText('Jan van Dam');
+    await expect(new ElectionOverviewPage(page).header).toHaveText('Gemeenteraad 2026');
+
+
+  
 
 });
+
+
