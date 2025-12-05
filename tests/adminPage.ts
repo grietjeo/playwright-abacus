@@ -12,10 +12,10 @@ export class AdminPage {
     }
 
    async open() {
-        await this.page.goto('https://kandidaat-aanduiding-lijsten.abacus-test.nl');
+        await this.page.goto('https://toegewezen-uiterlijk-stem.abacus-test.nl');
     }
 
-    async loginAsAdmin(role: string) {
+    async loginAs(role: string) {
         await this.page.getByRole('link', {name: role }).click();
     }
 

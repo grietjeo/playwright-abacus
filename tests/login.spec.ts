@@ -3,13 +3,20 @@ import { AdminPage } from './adminPage';
 import { ElectionOverviewPage } from './electionOverviewPage';
 
 
+const roles = [
+    {name: 'Beheerder 1'},
+    {name: 'Coördinator 1'},
+    {name: 'Invoerder 1'}
+]
 
-test('admin can login', async ({ page }) => {
+for (var role of roles) {
+  
+test(`Role ${role.name} can login`, async ({ page }) => {
  
     var adminPage = new AdminPage(page);
     await adminPage.open();
 
-    await adminPage.loginAsAdmin('Beheerder 1');
+    await adminPage.loginAs(role.name);
     
     await adminPage.selectElection('Gemeenteraad 2026');
 
@@ -19,5 +26,8 @@ test('admin can login', async ({ page }) => {
   
 
 });
+}
+
+
 
 
