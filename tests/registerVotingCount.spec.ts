@@ -20,5 +20,5 @@ test('Invoerder 1 can successfully register a voting count', async({ page, reque
 
     // Telling vastleggen
     await new ExtraOnderzoekPage(page).complete();
-    // await new VerschillenMetStembureauPage(page).complete();    
+    await new VerschillenMetStembureauPage(page).complete();    
 });
