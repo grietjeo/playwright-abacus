@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
-import { AdminPage } from './adminPage';
-import { ElectionOverviewPage } from './electionOverviewPage';
+import { AdminPage } from './pages/adminPage';
+import { ElectionOverviewPage } from './pages/electionOverviewPage';
 
 
 const roles = [

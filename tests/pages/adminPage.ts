@@ -12,7 +12,7 @@ export class AdminPage {
     }
 
    async open() {
-        await this.page.goto('https://toegewezen-uiterlijk-stem.abacus-test.nl');
+        await this.page.goto('https://centraal-personen-afdeling.abacus-test.nl');
     }
 
     async loginAs(role: string) {
