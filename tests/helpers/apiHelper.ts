@@ -17,7 +17,7 @@ export class ApiHelper {
         var cookies = await this.page.context().cookies();
         var sessionCookie = cookies.find(x => x.name == 'ABACUS_SESSION');
 
-        var response = await this.request.delete(`https://bestuur-benoeming-bewijs.abacus-test.nl/api/polling_stations/${station}/data_entries`, {
+        var response = await this.request.delete(`/api/polling_stations/${station}/data_entries`, {
             headers: {
                 'User-Agent': userAgent,
                 'Cookie': `ABACUS_SESSION=${sessionCookie?.value}`

@@ -36,7 +36,9 @@ export default defineConfig({
   projects: [
     {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      use: { 
+        ...devices['Desktop Chrome'],
+      baseURL: 'https://bestuur-benoeming-bewijs.abacus-test.nl'} 
     },
 
     // {

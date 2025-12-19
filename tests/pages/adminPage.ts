@@ -1,8 +1,6 @@
 import { expect, Page } from "@playwright/test";
 
-/**
- * iets doms
- */
+
 export class AdminPage {
 
     private readonly page: Page;
@@ -12,7 +10,7 @@ export class AdminPage {
     }
 
    async open() {
-        await this.page.goto('https://bestuur-benoeming-bewijs.abacus-test.nl');
+        await this.page.goto('/');
     }
 
     async loginAs(role: string) {
