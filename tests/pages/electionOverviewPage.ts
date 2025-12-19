@@ -5,10 +5,12 @@ export class ElectionOverviewPage {
     private readonly page: Page;
 
     public readonly header: Locator;
+    public readonly confirmationCountSaved: Locator;
 
     constructor(page: Page) {
         this.page = page;
         this.header = this.page.locator('xpath=//h1');
+        this.confirmationCountSaved = this.page.locator('strong.heading-md')
     }
 
     async selectAvailablePollingStation(station: string) {
@@ -16,4 +18,6 @@ export class ElectionOverviewPage {
         await expect(this.page.locator('#pollingStationSelectorFeedback > div')).toHaveText('1e invoer');
         await this.page.getByRole('button', {name: 'Beginnen'}).click();
     }
+
+   
 }

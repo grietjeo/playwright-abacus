@@ -10,14 +10,14 @@ export class ApiHelper {
         this.request = request;
     }
 
-    async deletePollingForStation(station: number, polling: number) {
+    async deletePollingForStation(station: number) {
 
         var userAgent = await this.page.evaluate('navigator.userAgent');
 
         var cookies = await this.page.context().cookies();
         var sessionCookie = cookies.find(x => x.name == 'ABACUS_SESSION');
 
-        var response = await this.request.delete(`https://centraal-personen-afdeling.abacus-test.nl/api/polling_stations/${station}/data_entries/${polling}`, {
+        var response = await this.request.delete(`https://bestuur-benoeming-bewijs.abacus-test.nl/api/polling_stations/${station}/data_entries`, {
             headers: {
                 'User-Agent': userAgent,
                 'Cookie': `ABACUS_SESSION=${sessionCookie?.value}`
@@ -25,6 +25,6 @@ export class ApiHelper {
         })
 
         var statusCode = response.status();
-        expect(statusCode === 204 || statusCode === 409).toBeTruthy();
+        expect(statusCode === 204 || statusCode === 404).toBeTruthy();
     }
 }
