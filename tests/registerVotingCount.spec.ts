@@ -8,6 +8,7 @@ import { AantalKiezersEnStemmenPage } from "./pages/registerVotingCount/aantalKi
 import { VerschillenDEnHPage } from "./pages/registerVotingCount/verschillenDEnHPage";
 import { PartijTellingPage } from "./pages/registerVotingCount/partijTellingPage";
 import { ControlerenEnOpslaanPage } from "./pages/registerVotingCount/controlerenEnOpslaanPage";
+import { PartijTelling } from "./models/partijTelling";
 
 test.beforeEach('Delete any existing voting counts', async({ page, request}) => {
     var adminPage = new AdminPage(page);
@@ -35,8 +36,16 @@ test('Invoerder 1 can successfully register a voting count', async({ page, reque
     await new AantalKiezersEnStemmenPage(page).complete(10);   
     await new VerschillenDEnHPage(page).complete(); 
 
-    var partijTellingPage = new PartijTellingPage(page); 
-    await partijTellingPage.completeWithVotes(10);
+  var tellingPartij1: PartijTelling = {
+        candidates: [
+            {index: 0, votes: 5},
+            {index: 1, votes: 5}
+        ],
+        totalVotes: 10
+    };
+
+    var partijTellingPage = new PartijTellingPage(page);
+    await partijTellingPage.completeWithVotes(tellingPartij1);  
     await partijTellingPage.completeWithoutVotes();
     await partijTellingPage.completeWithoutVotes();
     await partijTellingPage.completeWithoutVotes();

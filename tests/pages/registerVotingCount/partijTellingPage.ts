@@ -1,4 +1,5 @@
 import { Page } from "@playwright/test";
+import { PartijTelling } from "../../models/partijTelling";
 
 export class PartijTellingPage {
 
@@ -8,12 +9,14 @@ export class PartijTellingPage {
         this.page = page;
     }
 
-    async completeWithVotes(numberOfVotes: number) {
-        await this.page.locator('#data\\.political_group_votes\\[0\\]\\.candidate_votes\\[0\\]\\.votes').fill(String(numberOfVotes));
-        await this.page.locator('#data\\.political_group_votes\\[0\\]\\.total').fill(String(numberOfVotes));
+    async completeWithVotes(telling: PartijTelling) {
+        for(var candidate of telling.candidates) {
+            await this.page.locator(`#data\\.political_group_votes\\[0\\]\\.candidate_votes\\[${candidate.index}\\]\\.votes`).fill(String(candidate.votes));
+        }
+        await this.page.locator('#data\\.political_group_votes\\[0\\]\\.total').fill(String(telling.totalVotes));
         await this.page.getByRole('button', { name: 'Volgende' }).click();
     }
-
+    
     async completeWithoutVotes() {
         await this.page.getByRole('button', { name: 'Volgende' }).click();
     }
